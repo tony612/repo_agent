@@ -1,4 +1,4 @@
-defmodule RepoAgent.TestWriteRepo do
+defmodule RepoAgent.FakeWriteRepo do
   def delete(_, _) do
     "delete/2 from TestWriteRepo"
   end

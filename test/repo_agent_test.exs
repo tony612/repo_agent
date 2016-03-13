@@ -1,6 +1,11 @@
 defmodule RepoAgentTest do
   use ExUnit.Case
-  doctest RepoAgent
+
+  setup do
+    Application.put_env(:repo_agent, :write_repo, RepoAgent.FakeWriteRepo)
+    Application.put_env(:repo_agent, :read_repo, RepoAgent.FakeReadRepo)
+    :ok
+  end
 
   test "all/2" do
     assert RepoAgent.all("query", []) == "all/2 from TestReadRepo"
