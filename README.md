@@ -1,20 +1,33 @@
 # RepoAgent
 
-**TODO: Add description**
+A super simple package for read-write splitting.
 
-## Installation
+## Usage
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+config
 
-  1. Add repo_agent to your list of dependencies in `mix.exs`:
+```elixir
+config :repo_agent,
+  write_repo: MasterRepo,
+  read_repo: SlaveRepo
+```
 
-        def deps do
-          [{:repo_agent, "~> 0.0.1"}]
-        end
+1. Normal read-write splitting. Just like a normal Repo
 
-  2. Ensure repo_agent is started before your application:
+```elixir
+defmodule PostController do
+  alias RepoAgent, as: Repo
 
-        def application do
-          [applications: [:repo_agent]]
-        end
+  def index do
+    Repo.all(Post)
+  end
 
+  def create do
+    %Post{}
+    |> Post.changeset(%{title: "AlphaGo vs Lee"})
+    |> Repo.insert
+  end
+end
+```
+
+2. You want to use master db for both write and read, e.g. payment. Just use the `MasterRepo`
