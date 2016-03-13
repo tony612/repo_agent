@@ -12,7 +12,7 @@ config :repo_agent,
   read_repo: SlaveRepo
 ```
 
-1. Normal read-write splitting. Just like a normal Repo
+1\. Normal read-write splitting. Just like a normal Repo
 
 ```elixir
 defmodule PostController do
@@ -30,4 +30,4 @@ defmodule PostController do
 end
 ```
 
-2. You want to use master db for both write and read, e.g. payment. Just use the `MasterRepo`
+2\. You want to use master db for both write and read, e.g. payment. Just use the `MasterRepo`
