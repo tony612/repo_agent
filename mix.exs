@@ -5,6 +5,7 @@ defmodule RepoAgent.Mixfile do
     [app: :repo_agent,
      version: "0.0.1",
      elixir: "~> 1.2",
+     elixirc_paths: elixirc_paths(Mix.env),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
     #  elixirc_paths: elixirc_paths(Mix.env),
@@ -18,6 +19,9 @@ defmodule RepoAgent.Mixfile do
   def application do
     [applications: [:logger, :ecto]]
   end
+
+  def elixirc_paths(:test), do: ["lib", "web", "test/support"]
+  def elixirc_paths(_), do: ["lib", "web"]
 
   defp test_paths do
     ["test", "integration_test"]
@@ -36,7 +40,7 @@ defmodule RepoAgent.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:ecto, "~> 2.0.0-beta.1"},
+    [{:ecto, "~> 2.0.0-rc.0"},
      {:postgrex, "~> 0.11.1", optional: true}]
   end
 end
